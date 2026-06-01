@@ -14,10 +14,14 @@ const Register = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleRegister({username,email,password})
-        navigate("/")
+        const res = await handleRegister({username,email,password})
+        if (res?.success) {
+            navigate("/")
+        } else {
+            alert(res?.message + ". Please login instead.")
+        }
     }
-
+    
     if(loading){
         return <LoadingScreen message="Creating account..." />
     }

@@ -14,10 +14,14 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await handleLogin({email,password})
-        navigate('/')
+        const res = await handleLogin({email,password})
+        if (res?.success) {
+            navigate('/')
+        } else {
+            alert(res?.message + ". Please register if you haven't.")
+        }
     }
-
+    
     if(loading){
         return <LoadingScreen message="Logging in..." />
     }
